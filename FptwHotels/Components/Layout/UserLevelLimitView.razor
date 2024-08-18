@@ -1,0 +1,27 @@
+﻿@if (_show)
+{
+    @ChildContent
+}
+
+@code {
+    [Parameter]
+    public UserLevel MinLevel { get; set; }
+    
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    private bool _show = false;
+
+    protected override void OnInitialized()
+    {
+        // TODO: Auth level
+        UserLevel currentLevel = UserLevel.Manager;
+        _show = MinLevel <= currentLevel;
+    }
+
+    protected override bool ShouldRender()
+    {
+        return _show;
+    }
+
+}

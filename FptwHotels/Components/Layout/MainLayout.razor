@@ -1,0 +1,19 @@
+﻿@inherits LayoutComponentBase
+
+<div class="page">
+    <div class="container">
+        <NavMenu/>
+    </div>
+    <main class="container content">
+        @Body
+        <br />
+        <hr />
+        <p class="footer-text">FPTW Hotels @@ @_time</p>
+    </main>
+</div>
+
+@code {
+
+    private readonly string _time = DateTime.Now.ToLongDateString();
+
+}

@@ -1,0 +1,33 @@
+﻿<nav class="navbar">
+    <div class="navbar-top">
+        <h1>Hotels</h1>
+    </div>
+    <ul class="navbar-links">
+        <li class="navbar-link">
+            <Icon Name="IconName.Home" />
+            <NavLink href="/">
+                <span>Home</span>
+            </NavLink>
+        </li>
+        
+        <UserLevelLimitView MinLevel="UserLevel.Reception">
+            <h5 class="navbar-heading">Reception</h5>
+            <li class="navbar-link">
+                <Icon Name="IconName.Bars"/>
+                <NavLink href="reservations">
+                    <span>Reservations</span>
+                </NavLink>
+            </li>
+        </UserLevelLimitView>
+    </ul>
+    <hr/>
+    <div class="navbar-links">
+        <p>Not logged in.</p>
+    </div>
+</nav>
+
+@code {
+
+    
+
+}
