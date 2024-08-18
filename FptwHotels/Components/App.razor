@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Components.Authorization
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,16 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <base href="/"/>
     <link rel="icon" type="image/png" href="favicon.png"/>
-    <link href="_content/Blazorise.Icons.FluentUI/FluentSystemIcons-Resizable.css" rel="stylesheet" />
-    <link href="_content/Blazorise/blazorise.css" rel="stylesheet" />
-    <link href="_content/Blazorise.FluentUI2/reboot.css" rel="stylesheet" />
-    <link href="_content/Blazorise.FluentUI2/blazorise.fluentui2.css" rel="stylesheet" />
-    <link href="main.css" rel="stylesheet" />
+    <link href="_content/Blazorise.Icons.FluentUI/FluentSystemIcons-Resizable.css" rel="stylesheet"/>
+    <link href="_content/Blazorise/blazorise.css" rel="stylesheet"/>
+    <link href="_content/Blazorise.FluentUI2/reboot.css" rel="stylesheet"/>
+    <link href="_content/Blazorise.FluentUI2/blazorise.fluentui2.css" rel="stylesheet"/>
+    <link href="main.css" rel="stylesheet"/>
     <HeadOutlet/>
 </head>
 
 <body>
-<Routes/>
+    <Routes @rendermode="new InteractiveServerRenderMode(prerender: false)" />
 <script src="_framework/blazor.web.js"></script>
 </body>
 

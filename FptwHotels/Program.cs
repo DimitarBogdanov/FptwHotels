@@ -1,7 +1,12 @@
+using Blazored.SessionStorage;
 using Blazorise;
 using Blazorise.FluentUI2;
 using Blazorise.Icons.FluentUI;
+using FptwHotels.Auth;
 using FptwHotels.Components;
+using FptwHotels.Data;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +19,20 @@ builder.Services
     .AddFluentUI2Providers()
     .AddFluentUIIcons();
 
+builder.Services.AddDbContext<HotelDbContext>();
+
+builder.Services.AddIdentity<UserAccountDto, IdentityRole<int>>()
+    .AddEntityFrameworkStores<HotelDbContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.AddBlazoredSessionStorage();
+builder.Services.AddScoped<AuthenticationStateProvider, HotelAuthenticationStateProvider>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+
 var app = builder.Build();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

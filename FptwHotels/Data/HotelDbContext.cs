@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace FptwHotels.Data;
 
-public sealed class HotelDbContext : DbContext
+public sealed class HotelDbContext : IdentityDbContext<UserAccountDto, IdentityRole<int>, int>
 {
     public DbSet<Room> Rooms { get; set; }
 

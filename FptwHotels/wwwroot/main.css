@@ -28,6 +28,7 @@ a {
     padding: 10px;
     overflow-x: hidden;
     overflow-y: scroll;
+    flex-direction: column;
 }
 
 .navbar {
@@ -78,4 +79,18 @@ a {
 .footer-text {
     min-width: 100%;
     text-align: center;
+}
+
+.alert {
+    background-color: var(--color-primary);
+    color: var(--color-bg-primary);
+    width: 80%;
+    padding: 15px;
+    margin: 20px 0;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }

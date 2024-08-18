@@ -1,15 +1,23 @@
-﻿<nav class="navbar">
+﻿@rendermode InteractiveServer
+
+@inject AuthenticationStateProvider AuthStateProvider
+@inject NavigationManager NavigationManager
+
+@using FptwHotels.Auth
+@using Microsoft.AspNetCore.Components.Authorization
+
+<nav class="navbar">
     <div class="navbar-top">
         <h1>Hotels</h1>
     </div>
     <ul class="navbar-links">
         <li class="navbar-link">
-            <Icon Name="IconName.Home" />
+            <Icon Name="IconName.Home"/>
             <NavLink href="/">
                 <span>Home</span>
             </NavLink>
         </li>
-        
+
         <UserLevelLimitView MinLevel="UserLevel.Reception">
             <h5 class="navbar-heading">Reception</h5>
             <li class="navbar-link">
@@ -28,12 +36,31 @@
     </ul>
     <hr/>
     <div class="navbar-links">
-        <p>Not logged in.</p>
+        <AuthorizeView>
+            <Authorized>
+                <span>Logged in as @context.User.Identity!.Name</span>
+                <a href="#" @onclick="async () => await HandleLogout()">Log out</a>
+            </Authorized>
+            <NotAuthorized>
+                <span>Not logged in.</span>
+                <span>
+                    <a href="/login">Log in</a>
+                    &bullet;
+                    <a href="/register">Register</a>
+                </span>
+            </NotAuthorized>
+        </AuthorizeView>
     </div>
 </nav>
 
 @code {
 
-    
+    [CascadingParameter]
+    private Task<AuthenticationState>? AuthenticationState { get; set; }
+
+    private async Task HandleLogout()
+    {
+        await ((HotelAuthenticationStateProvider)AuthStateProvider).EndUserSession();
+    }
 
 }
