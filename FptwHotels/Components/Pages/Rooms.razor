@@ -1,0 +1,45 @@
+﻿@page "/Rooms"
+@using FptwHotels.Components.Layout
+@using FptwHotels.Data
+
+<PageTitle>Rooms - FPTW Hotels</PageTitle>
+
+<h1>Rooms</h1>
+
+<Table>
+    <TableHeader>
+        <TableRow>
+            <TableHeaderCell>#</TableHeaderCell>
+            <TableHeaderCell>Status</TableHeaderCell>
+            <TableHeaderCell>Big beds</TableHeaderCell>
+            <TableHeaderCell>Small beds</TableHeaderCell>
+        </TableRow>
+    </TableHeader>
+    <TableBody>
+        @foreach (Room room in _rooms)
+        {
+            <TableRow>
+                <TableRowHeader>@room.Number</TableRowHeader>
+                <TableRowCell>Free</TableRowCell>
+                <TableRowCell>@room.BigBeds</TableRowCell>
+                <TableRowCell>@room.SingleBeds</TableRowCell>
+            </TableRow>
+        }
+    </TableBody>
+</Table>
+
+@code {
+    private List<Room> _rooms = new();
+    private bool _loading = false; // don't accept UI events during load
+
+    protected override void OnInitialized()
+    {
+        _loading = true;
+
+        HotelDbContext db = new();
+        _rooms.AddRange(db.Rooms);
+
+        _loading = false;
+    }
+
+}
